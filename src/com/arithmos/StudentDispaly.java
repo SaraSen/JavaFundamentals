@@ -2,7 +2,17 @@ package com.arithmos;
 
 import java.awt.EventQueue;
 
+import java.sql.*;
 import javax.swing.JFrame;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+import net.proteanit.sql.DbUtils;
+
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 //design only for this point
 
@@ -11,6 +21,9 @@ public class StudentDispaly extends javax.swing.JFrame {
 	/**
 	 * Launch the application.
 	 */
+
+	Connection conn = null;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -27,6 +40,7 @@ public class StudentDispaly extends javax.swing.JFrame {
 	 * Create the application.
 	 */
 	public StudentDispaly() {
+		conn = SqlConnection.dbConnector();
 		initialize();
 	}
 
@@ -34,6 +48,9 @@ public class StudentDispaly extends javax.swing.JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		
+		
 
 		jLabel2 = new javax.swing.JLabel();
 		jLabel1 = new javax.swing.JLabel();
@@ -59,41 +76,63 @@ public class StudentDispaly extends javax.swing.JFrame {
 		jScrollPane1.setViewportView(jTable1);
 
 		jButton1.setText("Search");
+		
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				Edit edit = new Edit();
+				edit.setVisible(true);
+			}
+		});
+		
+		JButton btnDelete = new JButton("Delete");
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
-				.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(layout.createSequentialGroup().addGap(358, 358, 358).addComponent(jLabel1))
-						.addGroup(layout.createSequentialGroup().addGap(24, 24, 24)
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-										.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 948,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGroup(layout.createSequentialGroup()
-												.addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 107,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 676,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addGap(27, 27, 27)
-												.addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-				.addContainerGap(40, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
-				.createSequentialGroup().addGap(36, 36, 36)
-				.addComponent(
-						jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addGap(18, 18, 18)
-				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-						.addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+		layout.setHorizontalGroup(
+			layout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(layout.createSequentialGroup()
+					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+						.addGroup(layout.createSequentialGroup()
+							.addGap(358)
+							.addComponent(jLabel1))
+						.addGroup(layout.createSequentialGroup()
+							.addGap(24)
+							.addGroup(layout.createParallelGroup(Alignment.LEADING)
+								.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 948, GroupLayout.PREFERRED_SIZE)
+								.addGroup(layout.createSequentialGroup()
+									.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 676, GroupLayout.PREFERRED_SIZE)
+									.addGap(27)
+									.addComponent(jButton1, GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)))))
+					.addContainerGap(40, Short.MAX_VALUE))
+				.addGroup(layout.createSequentialGroup()
+					.addContainerGap(667, Short.MAX_VALUE)
+					.addComponent(btnEdit)
+					.addGap(18)
+					.addComponent(btnDelete)
+					.addGap(205))
+		);
+		layout.setVerticalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addGap(36)
+					.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+						.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(jButton1))
-				.addGap(18, 18, 18).addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403,
-						javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addContainerGap(16, Short.MAX_VALUE)));
+					.addGap(18)
+					.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 332, GroupLayout.PREFERRED_SIZE)
+					.addGap(19)
+					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnDelete)
+						.addComponent(btnEdit, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(43, Short.MAX_VALUE))
+		);
+		getContentPane().setLayout(layout);
 
 		pack();
 		setLocationRelativeTo(null);
@@ -106,5 +145,4 @@ public class StudentDispaly extends javax.swing.JFrame {
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JTable jTable1;
 	private javax.swing.JTextField jTextField1;
-
 }
