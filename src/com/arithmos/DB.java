@@ -11,7 +11,7 @@ public class DB {
 
 	public static void createMyConnection() throws Exception {
 		Class.forName("com.mysql.jdbc.Driver");
-		c = DriverManager.getConnection("jdbc:mysql://localhost:3306/arithmos", "root", "");
+		c = DriverManager.getConnection("jdbc:mysql://localhost:3306/student", "user", "password");
 	}
 
 	public static void iud(String sql) throws Exception {

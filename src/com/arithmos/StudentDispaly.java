@@ -8,9 +8,17 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
+
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
 
 
 
@@ -20,7 +28,9 @@ public class StudentDispaly extends javax.swing.JFrame {
 	/**
 	 * Launch the application.
 	 */
-
+	Connection connection = null;
+	int selectedId;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -37,30 +47,25 @@ public class StudentDispaly extends javax.swing.JFrame {
 	 * Create the application.
 	 */
 	public StudentDispaly() {
+		try {
+			connection = DB.getMyConnection();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 		initialize();
 		displayAllStudents();
 	}
 
 	private void displayAllStudents() {
-		String sql = "SELECT * FROM `student`";
 		try {
-
-            ResultSet studentSet = DB.search(sql);
-            while (studentSet.next()) {
-                DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-                Vector <String> v = new Vector<String>();
-                v.add(studentSet.getString(1));
-                v.add(studentSet.getString(2));
-                v.add(studentSet.getString(3));
-                v.add(studentSet.getString(4));
-                v.add(studentSet.getString(5));
-                v.add(studentSet.getString(6));
-                v.add(studentSet.getString(7));
-                dtm.addRow(v);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+			String query = "select * from tbl_student";
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+			jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+		}catch(Exception e) {
+			
+		}
 
 	}
 
@@ -74,7 +79,16 @@ public class StudentDispaly extends javax.swing.JFrame {
 		jLabel3 = new javax.swing.JLabel();
 		jTextField1 = new javax.swing.JTextField();
 		jScrollPane1 = new javax.swing.JScrollPane();
+		
 		jTable1 = new javax.swing.JTable();
+		jTable1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+				int selectedRowIndex = jTable1.getSelectedRow();
+				selectedId = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+			}
+		});
 		jButton1 = new javax.swing.JButton();
 
 		jLabel2.setText("jLabel2");
@@ -101,9 +115,11 @@ public class StudentDispaly extends javax.swing.JFrame {
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
+				
 				Edit edit = new Edit();
+				Edit.txtEmail.setText(Integer.toString(selectedId));
 				edit.setVisible(true);
+				dispose();
 			}
 		});
 
@@ -111,18 +127,18 @@ public class StudentDispaly extends javax.swing.JFrame {
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		layout.setHorizontalGroup(
-			layout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addGroup(layout.createParallelGroup(Alignment.LEADING)
 						.addGroup(layout.createSequentialGroup()
 							.addGap(694)
 							.addComponent(btnEdit, GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+						.addGroup(layout.createSequentialGroup()
 							.addGap(358)
 							.addComponent(jLabel1))
-						.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+						.addGroup(layout.createSequentialGroup()
 							.addGap(24)
 							.addGroup(layout.createParallelGroup(Alignment.LEADING)
 								.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 948, GroupLayout.PREFERRED_SIZE)

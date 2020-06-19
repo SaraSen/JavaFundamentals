@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -17,9 +18,8 @@ public class Edit extends JFrame {
 	private JTextField txtLname;
 	private JTextField txtDob;
 	private JTextField txtGrade;
-	private JTextField txtEmail;
+	public static JTextField txtEmail;
 	private JTextField txtAddress;
-
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +39,9 @@ public class Edit extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public Edit() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 682, 457);
 		contentPane = new JPanel();
@@ -109,4 +111,7 @@ public class Edit extends JFrame {
 		txtAddress.setBounds(145, 245, 247, 22);
 		contentPane.add(txtAddress);
 	}
+	
+	
+	
 }
