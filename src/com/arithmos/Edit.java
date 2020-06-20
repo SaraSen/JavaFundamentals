@@ -14,12 +14,12 @@ import javax.swing.JButton;
 public class Edit extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtFName;
-	private JTextField txtLname;
-	private JTextField txtDob;
-	private JTextField txtGrade;
+	public static JTextField txtFName;
+	public static JTextField txtLname;
+	public static JTextField txtDob;
 	public static JTextField txtEmail;
-	private JTextField txtAddress;
+	public static JTextField txtAddress;
+	public static JTextField txtPhone;
 	/**
 	 * Launch the application.
 	 */
@@ -57,10 +57,6 @@ public class Edit extends JFrame {
 		lblBday.setBounds(57, 146, 98, 16);
 		contentPane.add(lblBday);
 		
-		JLabel lblGrade = new JLabel("Grade");
-		lblGrade.setBounds(57, 175, 98, 16);
-		contentPane.add(lblGrade);
-		
 		txtFName = new JTextField();
 		txtFName.setBounds(145, 76, 247, 22);
 		contentPane.add(txtFName);
@@ -77,11 +73,11 @@ public class Edit extends JFrame {
 		txtDob.setColumns(10);
 		
 		JButton btnSave = new JButton("Save");
-		btnSave.setBounds(308, 315, 97, 25);
+		btnSave.setBounds(321, 349, 97, 25);
 		contentPane.add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(426, 315, 97, 25);
+		btnCancel.setBounds(443, 349, 97, 25);
 		contentPane.add(btnCancel);
 		
 		JLabel lblLastName = new JLabel("Last Name");
@@ -89,29 +85,30 @@ public class Edit extends JFrame {
 		contentPane.add(lblLastName);
 		
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(57, 210, 98, 16);
+		lblEmail.setBounds(57, 178, 98, 16);
 		contentPane.add(lblEmail);
 		
 		JLabel lblAddress = new JLabel("Address");
-		lblAddress.setBounds(57, 248, 98, 16);
+		lblAddress.setBounds(57, 210, 98, 16);
 		contentPane.add(lblAddress);
-		
-		txtGrade = new JTextField();
-		txtGrade.setColumns(10);
-		txtGrade.setBounds(145, 175, 247, 22);
-		contentPane.add(txtGrade);
 		
 		txtEmail = new JTextField();
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(145, 207, 247, 22);
+		txtEmail.setBounds(145, 175, 247, 22);
 		contentPane.add(txtEmail);
 		
 		txtAddress = new JTextField();
 		txtAddress.setColumns(10);
-		txtAddress.setBounds(145, 245, 247, 22);
+		txtAddress.setBounds(145, 210, 247, 22);
 		contentPane.add(txtAddress);
+		
+		txtPhone = new JTextField();
+		txtPhone.setBounds(145, 248, 247, 22);
+		contentPane.add(txtPhone);
+		txtPhone.setColumns(10);
+		
+		JLabel lblPhone = new JLabel("phone");
+		lblPhone.setBounds(57, 251, 98, 16);
+		contentPane.add(lblPhone);
 	}
-	
-	
-	
 }

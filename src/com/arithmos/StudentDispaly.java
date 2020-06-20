@@ -3,6 +3,8 @@ package com.arithmos;
 import java.awt.EventQueue;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
@@ -28,8 +30,15 @@ public class StudentDispaly extends javax.swing.JFrame {
 	/**
 	 * Launch the application.
 	 */
+	private DefaultTableModel model;
 	Connection connection = null;
 	int selectedId;
+	String fName;
+	String lName;
+	String email;
+	String address;
+	String phone;
+	String bday;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -87,6 +96,13 @@ public class StudentDispaly extends javax.swing.JFrame {
 				DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
 				int selectedRowIndex = jTable1.getSelectedRow();
 				selectedId = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+				fName = model.getValueAt(selectedRowIndex, 1).toString();
+				lName = model.getValueAt(selectedRowIndex, 2).toString();
+				bday = model.getValueAt(selectedRowIndex, 3).toString();
+				email = model.getValueAt(selectedRowIndex, 4).toString();
+				address = model.getValueAt(selectedRowIndex, 5).toString();
+				phone = model.getValueAt(selectedRowIndex, 6).toString();
+				 
 			}
 		});
 		jButton1 = new javax.swing.JButton();
@@ -115,15 +131,38 @@ public class StudentDispaly extends javax.swing.JFrame {
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				try {
 				Edit edit = new Edit();
-				Edit.txtEmail.setText(Integer.toString(selectedId));
+				Edit.txtFName.setText(fName);
+				Edit.txtLname.setText(lName);
+				Edit.txtDob.setText(bday.toString());
+				Edit.txtEmail.setText(email);
+				Edit.txtAddress.setText(address);
+				Edit.txtPhone.setText(phone);
 				edit.setVisible(true);
 				dispose();
+				}catch(Exception e) {
+					JOptionPane.showMessageDialog(null, "Please Select a row before edit");
+				}
 			}
 		});
 
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String query = "delete from tbl_student where id="+selectedId;
+				try {
+					Statement statement = connection.createStatement();
+					statement.executeUpdate("DELETE FROM tbl_student WHERE id=" + selectedId + "");  
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			
+				
+			}
+		});
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		layout.setHorizontalGroup(
