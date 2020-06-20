@@ -150,16 +150,16 @@ public class StudentDispaly extends javax.swing.JFrame {
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String query = "delete from tbl_student where id="+selectedId;
-				try {
-					Statement statement = connection.createStatement();
-					statement.executeUpdate("DELETE FROM tbl_student WHERE id=" + selectedId + "");  
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				int deleteOK = JOptionPane.showConfirmDialog(null, "Are you sure?");
+				if(deleteOK==0) {
+					try {
+						Statement statement = connection.createStatement();
+						statement.executeUpdate("DELETE FROM tbl_student WHERE id=" + selectedId + "");  
+						displayAllStudents();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 				}
-				
-			
 				
 			}
 		});
