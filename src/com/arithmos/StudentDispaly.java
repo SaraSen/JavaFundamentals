@@ -113,7 +113,7 @@ public class StudentDispaly extends javax.swing.JFrame {
 		setTitle("View Students");
 
 		jLabel1.setFont(new java.awt.Font("Dialog", 1, 36));
-		jLabel1.setText("View All students");
+		jLabel1.setText("Student Registration");
 
 		jLabel3.setText("Search student");
 
@@ -163,6 +163,15 @@ public class StudentDispaly extends javax.swing.JFrame {
 				
 			}
 		});
+		
+		JButton btnAdd = new JButton("Add New");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddStudent addStudent = new AddStudent();
+				addStudent.setVisible(true);
+				dispose();
+			}
+		});
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		layout.setHorizontalGroup(
@@ -182,9 +191,11 @@ public class StudentDispaly extends javax.swing.JFrame {
 							.addGroup(layout.createParallelGroup(Alignment.LEADING)
 								.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 948, GroupLayout.PREFERRED_SIZE)
 								.addGroup(layout.createSequentialGroup()
+									.addComponent(btnAdd)
+									.addGap(173)
 									.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 676, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE)
 									.addGap(27)
 									.addComponent(jButton1, GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)))))
 					.addGap(40))
@@ -196,9 +207,10 @@ public class StudentDispaly extends javax.swing.JFrame {
 					.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 						.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(jButton1))
+						.addComponent(jButton1)
+						.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnAdd))
 					.addGap(18)
 					.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 332, GroupLayout.PREFERRED_SIZE)
 					.addGap(19)
