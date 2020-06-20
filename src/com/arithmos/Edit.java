@@ -6,10 +6,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.sql.Statement;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 
 public class Edit extends JFrame {
 
@@ -20,6 +26,9 @@ public class Edit extends JFrame {
 	public static JTextField txtEmail;
 	public static JTextField txtAddress;
 	public static JTextField txtPhone;
+	public static JTextField txtId;
+	Connection connection;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -41,6 +50,12 @@ public class Edit extends JFrame {
 	 */
 	
 	public Edit() {
+	
+		try {
+			connection = DB.getMyConnection();
+		} catch (Exception e) {	
+			e.printStackTrace();
+		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 682, 457);
@@ -73,6 +88,21 @@ public class Edit extends JFrame {
 		txtDob.setColumns(10);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int studentId = Integer.parseInt(txtId.getText());
+		        try {
+		        	Statement stmt = connection.createStatement();  
+					stmt.execute("UPDATE tbl_student SET FirstName='" + txtFName.getText() + "',LastName='" + txtLname.getText() + "',Bday='" + txtDob.getText() + "',Email='"+txtEmail.getText()+"',Address='"+txtAddress.getText()+"',Phone='"+txtPhone.getText()+"' WHERE id=" + studentId + "");
+					JOptionPane.showMessageDialog(null, "Successfully Updated");
+					dispose();
+					StudentDispaly studentDisplay = new StudentDispaly();
+					studentDisplay.setVisible(true);
+		        } catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, "Something went wrong");
+				}
+			}
+		});
 		btnSave.setBounds(321, 349, 97, 25);
 		contentPane.add(btnSave);
 		
@@ -110,5 +140,15 @@ public class Edit extends JFrame {
 		JLabel lblPhone = new JLabel("phone");
 		lblPhone.setBounds(57, 251, 98, 16);
 		contentPane.add(lblPhone);
+		
+		JLabel lblId = new JLabel("Student ID");
+		lblId.setBounds(57, 50, 84, 16);
+		contentPane.add(lblId);
+		
+		txtId = new JTextField();
+		txtId.setEditable(false);
+		txtId.setColumns(10);
+		txtId.setBounds(145, 47, 247, 22);
+		contentPane.add(txtId);
 	}
 }

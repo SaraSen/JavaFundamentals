@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -93,8 +94,11 @@ public class AddStudent extends JFrame {
 				
 				try {
 					Statement stmt = connection.createStatement();
-					stmt.executeUpdate("INSERT INTO tbl_student(FirstName,LastName,Bday,Email,Address,phone) VALUES('" + txtFName.getText() + "','" + txtLName.getText() + "','" + txtDob.getText() + "','"+txtEmail.getText()+"','"+txtAddress.getText()+"','"+txtPhone.getText()+"')");  
-							
+					stmt.executeUpdate("INSERT INTO tbl_student(FirstName,LastName,Bday,Email,Address,phone) VALUES('" + txtFName.getText() + "','" + txtLName.getText() + "','" + txtDob.getText() + "','"+txtEmail.getText()+"','"+txtAddress.getText()+"','"+txtPhone.getText()+"')"); 
+					JOptionPane.showMessageDialog(null, "Sudent Successfully Registered");
+					dispose();
+					StudentDispaly studentDisplay = new StudentDispaly();
+					studentDisplay.setVisible(true);
 				}catch(SQLException ex) {
 					ex.printStackTrace();
 				}

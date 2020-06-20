@@ -132,7 +132,9 @@ public class StudentDispaly extends javax.swing.JFrame {
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					
 				Edit edit = new Edit();
+				Edit.txtId.setText(Integer.toString(selectedId));
 				Edit.txtFName.setText(fName);
 				Edit.txtLname.setText(lName);
 				Edit.txtDob.setText(bday.toString());
