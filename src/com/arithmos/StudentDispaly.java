@@ -31,14 +31,14 @@ public class StudentDispaly extends javax.swing.JFrame {
 	 * Launch the application.
 	 */
 	private DefaultTableModel model;
-	Connection connection = null;
+	private Connection connection = null;
 	int selectedId;
-	String fName;
-	String lName;
-	String email;
-	String address;
-	String phone;
-	String bday;
+	private String fName;
+	private String lName;
+	private String email;
+	private String address;
+	private String phone;
+	private String bday;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -58,8 +58,7 @@ public class StudentDispaly extends javax.swing.JFrame {
 	public StudentDispaly() {
 		try {
 			connection = DB.getMyConnection();
-		} catch (Exception e) {
-			
+		} catch (Exception e) {		
 			e.printStackTrace();
 		}
 		initialize();
@@ -73,9 +72,8 @@ public class StudentDispaly extends javax.swing.JFrame {
 			ResultSet rs = pst.executeQuery();
 			jTable1.setModel(DbUtils.resultSetToTableModel(rs));
 		}catch(Exception e) {
-			
+			JOptionPane.showMessageDialog(null, "Something went wrong");
 		}
-
 	}
 
 	/**

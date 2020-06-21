@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class Edit extends JFrame {
 
@@ -65,25 +66,25 @@ public class Edit extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblFName = new JLabel("First Name");
-		lblFName.setBounds(57, 79, 98, 16);
+		lblFName.setBounds(110, 172, 98, 16);
 		contentPane.add(lblFName);
 		
 		JLabel lblBday = new JLabel("Date of Birth");
-		lblBday.setBounds(57, 146, 98, 16);
+		lblBday.setBounds(110, 230, 98, 16);
 		contentPane.add(lblBday);
 		
 		txtFName = new JTextField();
-		txtFName.setBounds(145, 76, 247, 22);
+		txtFName.setBounds(227, 169, 247, 22);
 		contentPane.add(txtFName);
 		txtFName.setColumns(10);
 		
 		txtLname = new JTextField();
-		txtLname.setBounds(145, 108, 247, 22);
+		txtLname.setBounds(227, 198, 247, 22);
 		contentPane.add(txtLname);
 		txtLname.setColumns(10);
 		
 		txtDob = new JTextField();
-		txtDob.setBounds(145, 143, 247, 22);
+		txtDob.setBounds(227, 227, 247, 22);
 		contentPane.add(txtDob);
 		txtDob.setColumns(10);
 		
@@ -103,52 +104,65 @@ public class Edit extends JFrame {
 				}
 			}
 		});
-		btnSave.setBounds(321, 349, 97, 25);
+		btnSave.setBounds(377, 360, 97, 25);
 		contentPane.add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(443, 349, 97, 25);
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				StudentDispaly studentDisplay = new StudentDispaly();
+				studentDisplay.setVisible(true);
+				dispose();
+			}
+		});
+		
+		btnCancel.setBounds(479, 360, 97, 25);
 		contentPane.add(btnCancel);
 		
 		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(57, 111, 98, 16);
+		lblLastName.setBounds(110, 201, 98, 16);
 		contentPane.add(lblLastName);
 		
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(57, 178, 98, 16);
+		lblEmail.setBounds(110, 259, 98, 16);
 		contentPane.add(lblEmail);
 		
 		JLabel lblAddress = new JLabel("Address");
-		lblAddress.setBounds(57, 210, 98, 16);
+		lblAddress.setBounds(110, 288, 98, 16);
 		contentPane.add(lblAddress);
 		
 		txtEmail = new JTextField();
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(145, 175, 247, 22);
+		txtEmail.setBounds(227, 256, 247, 22);
 		contentPane.add(txtEmail);
 		
 		txtAddress = new JTextField();
 		txtAddress.setColumns(10);
-		txtAddress.setBounds(145, 210, 247, 22);
+		txtAddress.setBounds(227, 285, 247, 22);
 		contentPane.add(txtAddress);
 		
 		txtPhone = new JTextField();
-		txtPhone.setBounds(145, 248, 247, 22);
+		txtPhone.setBounds(227, 314, 247, 22);
 		contentPane.add(txtPhone);
 		txtPhone.setColumns(10);
 		
 		JLabel lblPhone = new JLabel("phone");
-		lblPhone.setBounds(57, 251, 98, 16);
+		lblPhone.setBounds(110, 317, 98, 16);
 		contentPane.add(lblPhone);
 		
 		JLabel lblId = new JLabel("Student ID");
-		lblId.setBounds(57, 50, 84, 16);
+		lblId.setBounds(110, 143, 84, 16);
 		contentPane.add(lblId);
 		
 		txtId = new JTextField();
 		txtId.setEditable(false);
 		txtId.setColumns(10);
-		txtId.setBounds(145, 47, 247, 22);
+		txtId.setBounds(227, 140, 247, 22);
 		contentPane.add(txtId);
+		
+		JLabel lblNewLabel = new JLabel("Edit Student ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 36));
+		lblNewLabel.setBounds(211, 42, 241, 56);
+		contentPane.add(lblNewLabel);
 	}
 }
