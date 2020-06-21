@@ -33,7 +33,8 @@ public class DB {
 	public static void createMyConnection() throws Exception {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		unwrap();
-		c = DriverManager.getConnection("jdbc:mysql://localhost:" + dbinitmodal.getPortTf() + "/" + dbinitmodal.getDbNameTf(), dbinitmodal.getUsernameTf(), dbinitmodal.getPasswordTf());
+		c = DriverManager.getConnection("jdbc:mysql://localhost:" + dbinitmodal.getPortTf() + "/" 
+		+ dbinitmodal.getDbNameTf(), dbinitmodal.getUsernameTf(), dbinitmodal.getPasswordTf());
 	}
 
 	public static void iud(String sql) throws Exception {

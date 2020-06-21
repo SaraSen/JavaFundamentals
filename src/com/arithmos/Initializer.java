@@ -25,7 +25,9 @@ public class Initializer extends javax.swing.JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new Initializer().setVisible(true);
+					Initializer initializer = new Initializer();
+					initializer.setVisible(true);
+					initializer.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

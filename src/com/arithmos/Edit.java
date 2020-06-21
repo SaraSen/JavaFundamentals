@@ -38,6 +38,7 @@ public class Edit extends JFrame {
 			public void run() {
 				try {
 					Edit frame = new Edit();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
