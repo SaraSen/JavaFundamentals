@@ -67,7 +67,7 @@ public class StudentDispaly extends javax.swing.JFrame {
 
 	private void displayAllStudents() {
 		try {
-			String query = "select * from tbl_student";
+			String query = "SELECT * FROM `tbl_student`";
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
 			jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -141,6 +141,7 @@ public class StudentDispaly extends javax.swing.JFrame {
 				Edit.txtPhone.setText(phone);
 				edit.setVisible(true);
 				dispose();
+				System.gc();
 				}catch(Exception e) {
 					JOptionPane.showMessageDialog(null, "Please Select a row before edit");
 				}
@@ -192,12 +193,12 @@ public class StudentDispaly extends javax.swing.JFrame {
 								.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 948, GroupLayout.PREFERRED_SIZE)
 								.addGroup(layout.createSequentialGroup()
 									.addComponent(btnAdd)
-									.addGap(173)
+									.addGap(95)
 									.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 484, GroupLayout.PREFERRED_SIZE)
 									.addGap(27)
-									.addComponent(jButton1, GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)))))
+									.addComponent(jButton1, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)))))
 					.addGap(40))
 		);
 		layout.setVerticalGroup(
@@ -209,8 +210,8 @@ public class StudentDispaly extends javax.swing.JFrame {
 					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(jButton1)
-						.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAdd))
+						.addComponent(btnAdd)
+						.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 332, GroupLayout.PREFERRED_SIZE)
 					.addGap(19)
